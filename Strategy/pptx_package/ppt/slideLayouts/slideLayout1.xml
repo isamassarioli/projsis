@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sldLayout xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Title"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:txBody>
+          <a:bodyPr/>
+          <a:lstStyle/>
+          <a:p/>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:tpSp/>
+</p:sldLayout>
