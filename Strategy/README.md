@@ -1,31 +1,72 @@
-# Strategy pattern — exemplo acadêmico
+# Strategy Pattern
 
-Este projeto contém um exemplo do padrão Strategy em Java. Além do exemplo original (cálculo de imposto sobre salário), incluí um exemplo relacionado ao domínio acadêmico, conforme solicitado.
+Este projeto mostra o padrao Strategy em Java com dois exemplos:
 
-Arquivos adicionados (exemplo acadêmico):
+1. O exemplo original, em `src/strategy`, calcula imposto de funcionario com estrategias diferentes por cargo.
+2. O exemplo academico, em `src/academico`, calcula a nota final de um aluno trocando a estrategia de avaliacao.
 
-- `src/strategy/academico/AvaliacaoStrategy.java` — interface Strategy
-- `src/strategy/academico/MediaAritmetica.java` — implementação (média simples)
-- `src/strategy/academico/MediaPonderada.java` — implementação (média ponderada; faz fallback para média simples se pesos faltarem)
-- `src/strategy/academico/AvaliacaoContext.java` — contexto que utiliza a estratégia
-- `src/strategy/academico/AvaliacaoDemo.java` — demo (classe com main)
+## O que e o Strategy
 
-Como rodar (Windows / PowerShell):
+O Strategy separa o algoritmo do restante da aplicacao. Em vez de deixar a regra fixa dentro de uma classe, o contexto recebe uma estrategia e delega a execucao para ela. Assim, e possivel trocar o comportamento sem alterar o codigo principal.
 
-1. Compilar todos os fontes Java (certifique-se que `javac` está no PATH):
+## Exemplo academico
 
-```powershell
-javac -d build/classes src\strategy\*.java src\strategy\academico\*.java
+No exemplo academico, a ideia e calcular a nota final usando estrategias diferentes:
+
+- `AvaliacaoStrategy` define o contrato.
+- `MediaAritmetica` calcula a media simples.
+- `MediaPonderada` calcula a media ponderada e, se nao houver pesos validos, usa a media simples como fallback.
+- `AvaliacaoContext` recebe a estrategia e faz a chamada.
+- `AvaliacaoDemo` mostra o uso em um `main`.
+
+Fluxo de uso:
+
+1. O contexto e criado com uma estrategia.
+2. A estrategia pode ser trocada em tempo de execucao.
+3. O contexto apenas delega o calculo, sem conhecer a regra interna.
+
+## Exemplo original
+
+O exemplo em `src/strategy` usa a mesma ideia para imposto de funcionario:
+
+- `Funcionario` escolhe a estrategia de calculo conforme o cargo.
+- `CalculaImposto` define o contrato.
+- `CalculoImpostoQuinzeOuDez` e `CalculoImpostoVinteOuQuinze` sao estrategias concretas.
+- `Strategy` e a classe com `main` que executa a demonstracao.
+
+## Estrutura
+
+```text
+src/
+	academico/
+		AvaliacaoContext.java
+		AvaliacaoDemo.java
+		AvaliacaoStrategy.java
+		MediaAritmetica.java
+		MediaPonderada.java
+	strategy/
+		CalculaImposto.java
+		CalculoImpostoQuinzeOuDez.java
+		CalculoImpostoVinteOuQuinze.java
+		Funcionario.java
+		Strategy.java
 ```
 
-2. Executar a demo acadêmica:
+## Como executar
+
+No Windows, com `javac` e `java` disponiveis no PATH:
 
 ```powershell
-java -cp build/classes strategy.academico.AvaliacaoDemo
+javac -d build/classes src\strategy\*.java src\academico\*.java
+java -cp build/classes academico.AvaliacaoDemo
 ```
 
-Geração do ZIP para entrega:
+Se quiser executar o exemplo original, troque a classe final por:
 
-Inclua no ZIP: todo o diretório `src`, `README.md` e o arquivo `build.xml` (se desejar). O arquivo de apresentação (slides) não foi criado aqui — adicione o arquivo da apresentação ao ZIP antes de enviar.
+```powershell
+java -cp build/classes strategy.Strategy
+```
 
-Observação: Se quiser, posso criar um modelo de slides (ex.: Markdown ou PowerPoint) com 4-6 slides explicando o padrão Strategy aplicado ao sistema acadêmico. Quer que eu gere isso também?
+## Resumo
+
+O ponto principal do Strategy e manter a regra variavel isolada em classes diferentes. Isso facilita manutencao, testes e extensao, porque novas regras podem ser adicionadas sem modificar o contexto.
