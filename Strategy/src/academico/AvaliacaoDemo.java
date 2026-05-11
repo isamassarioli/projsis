@@ -5,7 +5,7 @@ package academico;
  */
 public class AvaliacaoDemo {
     public static void main(String[] args) {
-        double[] notas = { 7.5, 8.0, 6.0 };
+        double[] notas = { 75.0, 80.0, 60.0 };
         double[] pesos = { 2.0, 3.0, 1.0 };
 
         AvaliacaoContext contexto = new AvaliacaoContext(new MediaAritmetica());
@@ -18,7 +18,7 @@ public class AvaliacaoDemo {
 
         // If there are no weights, the weighted strategy falls back to arithmetic mean
         contexto.setEstrategia(new MediaPonderada());
-        double notaSemPesos = contexto.calcular(new double[] { 9.0, 7.0 }, null);
+        double notaSemPesos = contexto.calcular(new double[] { 90.0, 70.0 }, null);
         System.out.println("Nota final (ponderada, sem pesos -> fallback aritmética): " + notaSemPesos);
     }
 }
