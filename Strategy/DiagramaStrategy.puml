@@ -1,0 +1,64 @@
+@startuml DiagramaEstrategia
+!theme plain
+
+skinparam classBackgroundColor #FEFECE
+skinparam classBorderColor #D4AC0D
+skinparam backgroundColor #FFFACD
+skinparam arrowColor #555555
+
+title Padrão Strategy - Avaliação Acadêmica
+
+package "academico" {
+    interface AvaliacaoStrategy {
+        {abstract} +calcularNotaFinal(notas: double[], pesos: double[]): double
+    }
+
+    class AvaliacaoContext {
+        -estrategia: AvaliacaoStrategy
+        +AvaliacaoContext(estrategia: AvaliacaoStrategy)
+        +setEstrategia(estrategia: AvaliacaoStrategy): void
+        +calcular(notas: double[], pesos: double[]): double
+    }
+
+    class MediaAritmetica implements AvaliacaoStrategy {
+        +calcularNotaFinal(notas: double[], pesos: double[]): double
+    }
+
+    class MediaPonderada implements AvaliacaoStrategy {
+        +calcularNotaFinal(notas: double[], pesos: double[]): double
+    }
+
+    class AvaliacaoDemo {
+        +{static} main(args: String[]): void
+    }
+}
+
+AvaliacaoContext --> AvaliacaoStrategy : usa
+AvaliacaoDemo --> AvaliacaoContext : cria/usa
+AvaliacaoDemo --> MediaAritmetica : cria
+AvaliacaoDemo --> MediaPonderada : cria
+
+note right of AvaliacaoStrategy
+  Interface Strategy que define
+  o contrato para calcular
+  a nota final
+end note
+
+note right of AvaliacaoContext
+  Context que mantém
+  uma referência ao Strategy
+  e delega o cálculo
+end note
+
+note right of MediaAritmetica
+  Concrete Strategy 1
+  Calcula média aritmética simples
+end note
+
+note right of MediaPonderada
+  Concrete Strategy 2
+  Calcula média ponderada
+  com fallback para aritmética
+end note
+
+@enduml
