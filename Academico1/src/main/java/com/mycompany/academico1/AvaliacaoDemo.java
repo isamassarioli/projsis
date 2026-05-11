@@ -18,7 +18,7 @@ public class AvaliacaoDemo {
 
         // If there are no weights, the weighted strategy falls back to arithmetic mean
         contexto.setEstrategia(new MediaPonderada());
-        double notaSemPesos = contexto.calcular(new double[] { 9.0, 7.0 }, null);
+        double notaSemPesos = contexto.calcular(new double[] { 90.0, 70.0 }, null);
         //System.out.println("Nota final (ponderada, sem pesos -> fallback aritmetica): " + notaSemPesos);
     }
 }
